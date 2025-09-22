@@ -582,6 +582,8 @@ const DATA = {
     "Git / GitHub",
     "VS Code",
     "Docker",
+    "React",
+    "CSS/Tailwind",
   ],
   projects: [
     {
