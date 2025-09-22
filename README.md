@@ -42,8 +42,6 @@ Add blog section
 
 Add animations & transitions
 
-Dark mode support
-
 ## Contact
 
 If you’d like to connect, feel free to reach out:
