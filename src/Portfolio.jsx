@@ -570,7 +570,6 @@ const DATA = {
     "JavaScript",
     "TypeScript",
     "React",
-    "Next.js",
     "Node.js",
     "Express",
     "HTML",
@@ -583,11 +582,6 @@ const DATA = {
     "Git / GitHub",
     "VS Code",
     "Docker",
-    "Kubernetes (K8s)",
-    "AWS",
-    "REST APIs",
-    "Testing / Jest",
-    "Accessibility (a11y)",
   ],
   projects: [
     {
