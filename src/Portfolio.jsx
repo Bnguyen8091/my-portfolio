@@ -259,7 +259,10 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
           {allTags.map((t) => (
             <button
               key={t}
-              onClick={() => { setActiveTag(t); setIndex(0); }}
+              onClick={() => {
+                setActiveTag(t);
+                setIndex(0);
+              }}
               className={
                 "rounded-full border px-3 py-1 text-sm shadow-sm transition " +
                 (activeTag === t
@@ -275,10 +278,11 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
 
       {/* Carousel frame */}
       {len === 0 ? (
-        <p className="text-sm text-neutral-600 dark:text-neutral-300">No projects found.</p>
+        <p className="text-sm text-neutral-600 dark:text-neutral-300">
+          No projects found.
+        </p>
       ) : (
         <div className="relative mx-auto max-w-6xl px-8 sm:px-12 md:px-20 overflow-hidden">
- 
           {/* Left arrow */}
           <button
             onClick={prev}
@@ -296,17 +300,22 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
             {visibleIdxs.map((vi) => {
               const p = projects[vi];
+              const hasRepo =
+                p.repo && p.repo.trim() !== "#" && p.repo.trim() !== "";
+
+              const CardTag = hasRepo ? "a" : "div";
+              const cardProps = hasRepo
+                ? { href: p.repo, target: "_blank", rel: "noopener noreferrer" }
+                : {};
+
               return (
-                <a
+                <CardTag
                   key={p.title}
-                  href={p.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...cardProps}
                   className="group flex flex-col overflow-hidden rounded-2xl 
                              border border-neutral-200 bg-white shadow-sm transition 
                              hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900"
                 >
-                  {/* Image instead of placeholder */}
                   <img
                     src={p.image}
                     alt={p.title}
@@ -321,6 +330,7 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
                         {p.summary}
                       </p>
                     </div>
+
                     <div className="mt-auto flex flex-wrap gap-2">
                       {(p.tags || []).map((t) => (
                         <span
@@ -331,11 +341,15 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
                         </span>
                       ))}
                     </div>
-                    <div className="flex items-center justify-end pt-2 text-sm">
-                      <span className="hover:opacity-80">Code ↗</span>
-                    </div>
+
+                    {/* Only show "Code" when repo exists */}
+                    {hasRepo && (
+                      <div className="flex items-center justify-end pt-2 text-sm">
+                        <span className="hover:opacity-80">Code ↗</span>
+                      </div>
+                    )}
                   </div>
-                </a>
+                </CardTag>
               );
             })}
           </div>
@@ -357,6 +371,7 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
     </section>
   );
 }
+
 
 function Experience() {
   return (
