@@ -1,5 +1,8 @@
 import { useMemo, useState, useEffect } from "react";
 
+// 🔥 Base URL for GitHub Pages (fixes all asset paths)
+const PUBLIC_URL = process.env.PUBLIC_URL || "";
+
 export default function Portfolio() {
   const [query, setQuery] = useState("");
   const [activeTag, setActiveTag] = useState("All");
@@ -19,7 +22,7 @@ export default function Portfolio() {
   }, [query, activeTag]);
 
   return (
-     <main className="min-h-screen bg-white text-brand-dark antialiased dark:bg-neutral-950 dark:text-neutral-100">
+    <main className="min-h-screen bg-white text-brand-dark antialiased dark:bg-neutral-950 dark:text-neutral-100">
       <SkipLink />
       <Header />
       <section id="top" className="relative overflow-hidden">
@@ -96,10 +99,9 @@ function Header() {
 }
 
 function ThemeToggle() {
-  const [isDark, setIsDark] = useState(() => {
-    // Derive initial state from <html> (set by preload script)
-    return document.documentElement.classList.contains("dark");
-  });
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
 
   function applyTheme(nextIsDark) {
     setIsDark(nextIsDark);
@@ -168,8 +170,9 @@ function Hero() {
       </div>
       <div className="order-1 lg:order-2">
         <div className="relative mx-auto aspect-square w-56 overflow-hidden rounded-3xl border border-neutral-200 bg-gradient-to-br from-neutral-100 to-neutral-50 shadow-sm dark:border-neutral-800 dark:from-neutral-900 dark:to-neutral-950 sm:w-64 md:w-72">
+          {/* FIXED IMAGE PATH */}
           <img
-            src="/profile.jpg"
+            src={`${PUBLIC_URL}/profile.JPG`}
             alt="Brian Nguyen"
             className="absolute inset-0 h-full w-full object-cover object-center"
             loading="eager"
@@ -224,7 +227,6 @@ function Skills() {
 function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags }) {
   const [index, setIndex] = useState(0);
 
-  // Keep index valid if filter changes the list size
   useEffect(() => {
     if (projects.length === 0) return;
     if (index >= projects.length) setIndex(0);
@@ -316,11 +318,13 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
                              border border-neutral-200 bg-white shadow-sm transition 
                              hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900"
                 >
+                  {/* FIXED PROJECT IMAGE PATH */}
                   <img
                     src={p.image}
                     alt={p.title}
                     className="aspect-video w-full object-cover"
                   />
+
                   <div className="flex flex-1 flex-col gap-3 p-4">
                     <div>
                       <h3 className="text-lg font-semibold tracking-tight group-hover:opacity-80">
@@ -342,7 +346,6 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
                       ))}
                     </div>
 
-                    {/* Only show "Code" when repo exists */}
                     {hasRepo && (
                       <div className="flex items-center justify-end pt-2 text-sm">
                         <span className="hover:opacity-80">Code ↗</span>
@@ -371,7 +374,6 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
     </section>
   );
 }
-
 
 function Experience() {
   return (
@@ -439,7 +441,7 @@ function Contact() {
 
       if (response.ok) {
         setStatus("success");
-        form.reset(); // clear form
+        form.reset();
       } else {
         setStatus("error");
       }
@@ -448,12 +450,9 @@ function Contact() {
     }
   }
 
-  // Fade out success message after 3 seconds
   useEffect(() => {
     if (status === "success") {
-      const timer = setTimeout(() => {
-        setStatus("idle");
-      }, 3000);
+      const timer = setTimeout(() => setStatus("idle"), 3000);
       return () => clearTimeout(timer);
     }
   }, [status]);
@@ -546,16 +545,16 @@ function uniqueTags(projects) {
   return Array.from(set);
 }
 
-// --- Data (Edit if need any changes!) ---------------------------------------------------------
+// --- FIXED DATA WITH CORRECT BASE PATHS ---------------------------------------------------------
 const DATA = {
   meta: {
     name: "Brian Nguyen",
     shortName: "BN",
     tagline:
       "Aspiring software engineer passionate about building secure, user-friendly web experiences.",
-    resumeUrl: "/Brian-Nguyen-Resume.pdf", 
+    resumeUrl: `${PUBLIC_URL}/Brian-Nguyen-Resume.pdf`,
     ctas: [
-      { label: "View Resume", href: "/Brian-Nguyen-Resume.pdf" },
+      { label: "View Resume", href: `${PUBLIC_URL}/Brian-Nguyen-Resume.pdf` },
       { label: "Email Me", href: "#contact" },
       { label: "GitHub", href: "https://github.com/Bnguyen8091" },
     ],
@@ -569,6 +568,7 @@ const DATA = {
       { label: "LinkedIn", href: "https://www.linkedin.com/in/briannguyenlinked/" },
     ],
   },
+
   about: {
     paragraphs: [
       "I’m a developer who enjoys turning ideas into polished, performant products. I love the mix of system design, clean UI, and pragmatic engineering.",
@@ -581,6 +581,7 @@ const DATA = {
       "Hands-on with Git, Docker, AWS, Kubernetes, and Visual Studio Code for version control and cloud development",
     ],
   },
+
   skills: [
     "JavaScript",
     "TypeScript",
@@ -600,43 +601,42 @@ const DATA = {
     "React",
     "CSS/Tailwind",
   ],
+
   projects: [
     {
       title: "Helping Hand (Ticketing System)",
       summary:
         "A role-based helpdesk app with metrics dashboards, FAQ publishing, and secure flows (CSRF/XSS/SQLi mitigations).",
       tags: ["Full-stack", "MySQL", "Security", "PHP"],
-      link: "#",
       repo: "https://github.com/Bnguyen8091/Helping-Hand.git",
-      image: "/projects/helpinghand.png"
+      image: `${PUBLIC_URL}/projects/helpinghand.png`,
     },
     {
       title: "Personal Budget App",
       summary:
         "A budgeting tool with categories, charts, and expense insights. Built with Node/Angular/Express.",
-      tags: ["Web App", "Node", "Charts","Angular"],
-      link: "#",
+      tags: ["Web App", "Node", "Charts", "Angular"],
       repo: "https://github.com/Bnguyen8091/personal-budget-angular.git",
-      image: "/projects/personalbudget.png"
+      image: `${PUBLIC_URL}/projects/personalbudget.png`,
     },
     {
       title: "Hospital Database Management System",
-      summary: "Designed and normalized a hospital database schema with entities for patients, physicians, nurses, rooms, and payments...",
+      summary:
+        "Designed and normalized a hospital database schema with entities for patients, physicians, nurses, rooms, and payments...",
       tags: ["MySQL", "Database Design", "SQL"],
-      link: "#",  
       repo: "#",
-      image: "/projects/hostpital.png"
+      image: `${PUBLIC_URL}/projects/hostpital.png`,
     },
     {
       title: "UNCC Student Dashboard",
       summary:
         "A centralized portal for UNCC students to view schedules, grades, announcements, and manage tasks with role-based access and JWT authentication.",
       tags: ["React", "Node", "Express", "MySQL", "Auth"],
-      link: "#",  
-      repo: "https://github.com/Bnguyen8091/UNCC-Student-Dashboard.git",  
-      image: "/projects/dashboard.jpg"
-    }
+      repo: "https://github.com/Bnguyen8091/UNCC-Student-Dashboard.git",
+      image: `${PUBLIC_URL}/projects/dashboard.jpg`,
+    },
   ],
+
   experience: [
     {
       role: "Software Developer (Academic Projects)",
