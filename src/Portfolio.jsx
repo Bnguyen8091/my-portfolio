@@ -1,8 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
 
-// 🔥 Base URL for GitHub Pages (fixes all asset paths)
-const PUBLIC_URL = process.env.PUBLIC_URL || "";
-
 export default function Portfolio() {
   const [query, setQuery] = useState("");
   const [activeTag, setActiveTag] = useState("All");
@@ -170,9 +167,9 @@ function Hero() {
       </div>
       <div className="order-1 lg:order-2">
         <div className="relative mx-auto aspect-square w-56 overflow-hidden rounded-3xl border border-neutral-200 bg-gradient-to-br from-neutral-100 to-neutral-50 shadow-sm dark:border-neutral-800 dark:from-neutral-900 dark:to-neutral-950 sm:w-64 md:w-72">
-          {/* FIXED IMAGE PATH */}
+          {/* NOTE: relative path, no leading slash */}
           <img
-            src={`${PUBLIC_URL}/profile.JPG`}
+            src="profile.JPG"
             alt="Brian Nguyen"
             className="absolute inset-0 h-full w-full object-cover object-center"
             loading="eager"
@@ -278,14 +275,12 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
         </div>
       </div>
 
-      {/* Carousel frame */}
       {len === 0 ? (
         <p className="text-sm text-neutral-600 dark:text-neutral-300">
           No projects found.
         </p>
       ) : (
         <div className="relative mx-auto max-w-6xl px-8 sm:px-12 md:px-20 overflow-hidden">
-          {/* Left arrow */}
           <button
             onClick={prev}
             aria-label="Previous projects"
@@ -298,7 +293,6 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
             ◀
           </button>
 
-          {/* Cards */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
             {visibleIdxs.map((vi) => {
               const p = projects[vi];
@@ -318,13 +312,12 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
                              border border-neutral-200 bg-white shadow-sm transition 
                              hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900"
                 >
-                  {/* FIXED PROJECT IMAGE PATH */}
+                  {/* NOTE: relative paths, no leading slash */}
                   <img
                     src={p.image}
                     alt={p.title}
                     className="aspect-video w-full object-cover"
                   />
-
                   <div className="flex flex-1 flex-col gap-3 p-4">
                     <div>
                       <h3 className="text-lg font-semibold tracking-tight group-hover:opacity-80">
@@ -357,7 +350,6 @@ function Projects({ query, setQuery, activeTag, setActiveTag, projects, allTags 
             })}
           </div>
 
-          {/* Right arrow */}
           <button
             onClick={next}
             aria-label="Next projects"
@@ -545,16 +537,17 @@ function uniqueTags(projects) {
   return Array.from(set);
 }
 
-// --- FIXED DATA WITH CORRECT BASE PATHS ---------------------------------------------------------
+// --- Data (using RELATIVE paths) --------------------------------------------
 const DATA = {
   meta: {
     name: "Brian Nguyen",
     shortName: "BN",
     tagline:
       "Aspiring software engineer passionate about building secure, user-friendly web experiences.",
-    resumeUrl: `${PUBLIC_URL}/Brian-Nguyen-Resume.pdf`,
+    // relative path -> /my-portfolio/Brian-Nguyen-Resume.pdf in production
+    resumeUrl: "Brian-Nguyen-Resume.pdf",
     ctas: [
-      { label: "View Resume", href: `${PUBLIC_URL}/Brian-Nguyen-Resume.pdf` },
+      { label: "View Resume", href: "Brian-Nguyen-Resume.pdf" },
       { label: "Email Me", href: "#contact" },
       { label: "GitHub", href: "https://github.com/Bnguyen8091" },
     ],
@@ -568,7 +561,6 @@ const DATA = {
       { label: "LinkedIn", href: "https://www.linkedin.com/in/briannguyenlinked/" },
     ],
   },
-
   about: {
     paragraphs: [
       "I’m a developer who enjoys turning ideas into polished, performant products. I love the mix of system design, clean UI, and pragmatic engineering.",
@@ -581,7 +573,6 @@ const DATA = {
       "Hands-on with Git, Docker, AWS, Kubernetes, and Visual Studio Code for version control and cloud development",
     ],
   },
-
   skills: [
     "JavaScript",
     "TypeScript",
@@ -601,7 +592,6 @@ const DATA = {
     "React",
     "CSS/Tailwind",
   ],
-
   projects: [
     {
       title: "Helping Hand (Ticketing System)",
@@ -609,7 +599,8 @@ const DATA = {
         "A role-based helpdesk app with metrics dashboards, FAQ publishing, and secure flows (CSRF/XSS/SQLi mitigations).",
       tags: ["Full-stack", "MySQL", "Security", "PHP"],
       repo: "https://github.com/Bnguyen8091/Helping-Hand.git",
-      image: `${PUBLIC_URL}/projects/helpinghand.png`,
+      // relative -> /my-portfolio/projects/helpinghand.png
+      image: "projects/helpinghand.png",
     },
     {
       title: "Personal Budget App",
@@ -617,7 +608,7 @@ const DATA = {
         "A budgeting tool with categories, charts, and expense insights. Built with Node/Angular/Express.",
       tags: ["Web App", "Node", "Charts", "Angular"],
       repo: "https://github.com/Bnguyen8091/personal-budget-angular.git",
-      image: `${PUBLIC_URL}/projects/personalbudget.png`,
+      image: "projects/personalbudget.png",
     },
     {
       title: "Hospital Database Management System",
@@ -625,7 +616,7 @@ const DATA = {
         "Designed and normalized a hospital database schema with entities for patients, physicians, nurses, rooms, and payments...",
       tags: ["MySQL", "Database Design", "SQL"],
       repo: "#",
-      image: `${PUBLIC_URL}/projects/hostpital.png`,
+      image: "projects/hostpital.png",
     },
     {
       title: "UNCC Student Dashboard",
@@ -633,10 +624,9 @@ const DATA = {
         "A centralized portal for UNCC students to view schedules, grades, announcements, and manage tasks with role-based access and JWT authentication.",
       tags: ["React", "Node", "Express", "MySQL", "Auth"],
       repo: "https://github.com/Bnguyen8091/UNCC-Student-Dashboard.git",
-      image: `${PUBLIC_URL}/projects/dashboard.jpg`,
+      image: "projects/dashboard.jpg",
     },
   ],
-
   experience: [
     {
       role: "Software Developer (Academic Projects)",
@@ -671,7 +661,6 @@ const DATA = {
       ],
     },
   ],
-
   hobbies: [
     {
       title: "Pickleball",
