@@ -1,48 +1,66 @@
-# My Portfolio Website 
+# 🚀 My Portfolio Website
 
-This is my personal portfolio website built with **React** and **Tailwind CSS**.  
-It showcases my projects, skills, and experience as I grow in software development and design.
+A modern, responsive personal portfolio built with **React** and **Tailwind CSS**.
+This site showcases my projects, skills, experience, and personality as I continue growing in software development and UI/UX design.
 
-## Features
-- Responsive design optimized for desktop and mobile
-- Smooth navigation between sections
-- Projects with screenshots and links
-- Contact section to get in touch
+🔗 **Live Website:** [https://bnguyen8091.github.io/my-portfolio/](https://bnguyen8091.github.io/my-portfolio/)
 
-## Tech Stack
-- **React** (Frontend framework)
-- **Tailwind CSS** (Styling)
-- **JavaScript / JSX**
-- **Node.js** (for local development)
-- **GitHub Pages / Vercel / DigitalOcean** (for deployment)
+---
 
-## Project Structure
+## 🔥 Features
+
+* Fully responsive layout (mobile → desktop)
+* Clean modern UI with smooth section navigation
+* Dynamic project filtering + featured project carousel
+* Dark/Light mode toggle
+* Contact form powered by Formspree
+* Automated GitHub Pages deployment (CI/CD)
+
+---
+
+## 🛠️ Tech Stack
+
+* **React** – Frontend framework
+* **Tailwind CSS** – Utility-first styling
+* **JavaScript / JSX**
+* **GitHub Actions** – Automated build & deploy
+* **GitHub Pages** – Hosting
+
+---
+
+## 📁 Project Structure
+
+```
 my-portfolio/
-├── public/ # Static assets
-├── src/ # React components & styles
-│ ├── App.js
-│ ├── Portfolio.jsx
-│ ├── index.js
-│ └── ...
-├── package.json
+├── public/                 # Static files (images, assets, resume, etc.)
+│   ├── profile.JPG
+│   └── projects/
+├── src/                    # React components & code
+│   ├── Portfolio.jsx
+│   ├── index.js
+│   └── ...
 ├── tailwind.config.js
+├── package.json
 └── README.md
+```
 
-## Getting Started
-To run locally:
-```bash
-git clone https://github.com/Bnguyen8091/my-portfolio.git
-cd my-portfolio
-npm install
-npm start
+---
 
-🌟 Future Improvements
+## 🚧 Future Improvements
 
-Add blog section
+* Add animations / micro-interactions (Framer Motion)
+* Add a blog or case-study section
+* Enhance accessibility
+* Add content management or backend API support
 
-Add animations & transitions
+---
 
-## Contact
+## 📬 Contact
 
-If you’d like to connect, feel free to reach out:
-Brian Nguyen – https://www.linkedin.com/in/briannguyenlinked/ or nguyenbrian562@gmail.com
+**Brian Nguyen**
+📩 Email: **[nguyenbrian562@gmail.com](mailto:nguyenbrian562@gmail.com)**
+🔗 LinkedIn: [https://www.linkedin.com/in/briannguyenlinked/](https://www.linkedin.com/in/briannguyenlinked/)
+🔗 GitHub: [https://github.com/Bnguyen8091](https://github.com/Bnguyen8091)
+
+---
+
